@@ -13,7 +13,7 @@
             <b-form-input type="password" placeholder="Enter your Password" v-model="register.password"></b-form-input>
             <b-form-input type="password" placeholder="Enter your Password" v-model="register.passwordRepeat"></b-form-input>
             <b-form-checkbox id="checkbox1" v-model="register.agb">
-              Hiermit akzeptiere ich, dass mir das E-Sports Germany Website Team möglicherweise Emails sendet oder meine Email-Adresse anderweitig für interne Zwecke verwendet.
+              Hiermit akzeptiere ich, dass mir das E-Sports Germany Website Team möglicherweise Emails sendet oder meine Email-Adresse anderweitig für interne Zwecke (als Key) verwendet.
             </b-form-checkbox>
           </form>
         </b-tab>
@@ -49,7 +49,16 @@
             return e.cancel();
           }
           firebase.auth().signInWithEmailAndPassword(this.login.email,
-            this.login.password).catch(this.loginCallback(e));
+            this.login.password).catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              if (errorCode) {
+                toastr.error(`Sorry! Something went wrong with your Login!
+                  Error is: ${errorMessage}`);
+                return e.cancel();
+              }
+              return true;
+            });
         } else {
           if (!this.register.email || !this.register.password ||
             !this.register.passwordRepeat || !this.register.agb) {
@@ -61,27 +70,18 @@
             return e.cancel();
           }
           firebase.auth().createUserWithEmailAndPassword(this.register.email,
-            this.register.password).catch(this.registerCallback(e));
-        }
-        return true;
-      },
-      registerCallback: function registerCallback(error, e) {
-        if (error.code) {
-          toastr.error(`Sorry! Something went wrong with your Registration!
-          Errorcode: ${error.code}`);
-          return e.cancel();
-        }
-        toastr.success(`Your Registration was successful.
-        Welcome! You can now Login!`);
-        return true;
-      },
-      loginCallback: function loginCallback(error, e) {
-        if (error.code) {
-          toastr.error(`Sorry! Something went wrong with your Login!
-          Please Check your Credentials.
-          Errorcode: ${error.code}
-          LoginCallback`);
-          return e.cancel();
+            this.register.password).catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              if (errorCode) {
+                toastr.error(`Sorry! Something went wrong with your Registration!
+                Error is: ${errorMessage}`);
+                return e.cancel();
+              }
+              toastr.success(`Your Registration was successful.
+              Welcome! You can now Login!`);
+              return true;
+            });
         }
         return true;
       },

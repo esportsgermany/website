@@ -11,6 +11,9 @@
     props: ['data'],
     computed: {
       compiledMarkdown: function compiledMarkdownDescr() {
+        if (!this.data) {
+          this.data = ' ';
+        }
         return marked(this.data, { sanitize: true });
       },
     },

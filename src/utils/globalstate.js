@@ -3,6 +3,9 @@ const global = {
   loggedIn: false,
   user: {},
   admin: false,
+  activeTournamentDetail: {
+    text: '',
+  },
   login: function login(user) {
     this.loggedIn = true;
     this.user = user;
@@ -18,6 +21,15 @@ const global = {
   getNumber: function getNumber() {
     this.number += 1;
     return this.number;
+  },
+  makeKey: function makeKey(key) {
+    let newkey = key.replace(/\./g, '');
+    newkey = newkey.replace(/@/g, '');
+    newkey = newkey.replace(/#/g, '');
+    newkey = newkey.replace(/\$/g, '');
+    newkey = newkey.replace(/\[/g, '');
+    newkey = newkey.replace(/\]/g, '');
+    return newkey;
   },
 };
 export default global;

@@ -9,6 +9,8 @@ import Contact from '@/pages/Contact';
 import Fifa from '@/pages/Fifa';
 import Hearthstone from '@/pages/Hearthstone';
 import UpcomingEvents from '@/pages/UpcomingEvents';
+import Tournament from '@/pages/Tournament';
+import TournamentDetails from '@/pages/TournamentDetails';
 
 Vue.use(Router);
 
@@ -58,6 +60,16 @@ export default new Router({
       path: '/upcoming',
       name: 'UpcomingEvents',
       component: UpcomingEvents,
+    },
+    {
+      path: '/tournament',
+      name: 'Tournament',
+      component: Tournament,
+    },
+    {
+      path: '/tournament/detail',
+      name: 'TournamentDetails',
+      component: TournamentDetails,
     },
   ],
 });
