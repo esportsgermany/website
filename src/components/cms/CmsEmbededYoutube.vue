@@ -1,7 +1,7 @@
 <template>
   <div class="cms-embeded-youtube">
     <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" width="100%" height="100%" :src="data.src" frameborder="0" allowfullscreen></iframe>
+      <div v-html="data"></div>
     </div>
   </div>
 </template>

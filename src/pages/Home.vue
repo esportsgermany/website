@@ -27,11 +27,6 @@
           background: 'black',
           slides: [
             {
-              img: 'static/img/slides/home/fifatournament.png',
-              caption: '',
-              link: '#/fifatournament',
-            },
-            {
               img: 'static/img/slides/home/defaultslide.png',
               caption: 'Unsere bisherigen Events',
               link: '#/pastevents',

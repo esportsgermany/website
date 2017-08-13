@@ -8,7 +8,7 @@ import Join from '@/pages/Join';
 import Contact from '@/pages/Contact';
 import Fifa from '@/pages/Fifa';
 import Hearthstone from '@/pages/Hearthstone';
-import Fifatournament from '@/pages/FifaTournament';
+import UpcomingEvents from '@/pages/UpcomingEvents';
 
 Vue.use(Router);
 
@@ -55,9 +55,9 @@ export default new Router({
       component: Hearthstone,
     },
     {
-      path: '/fifatournament',
-      name: 'Fifatournament',
-      component: Fifatournament,
+      path: '/upcoming',
+      name: 'UpcomingEvents',
+      component: UpcomingEvents,
     },
   ],
 });

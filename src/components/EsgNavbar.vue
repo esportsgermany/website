@@ -24,17 +24,31 @@
         <b-nav is-nav-bar class="ml-auto" v-for="navbaritem in navbaritemsright" :key="navbaritem.title">
           <b-nav-item :to="navbaritem.link">{{ navbaritem.title }}</b-nav-item>
         </b-nav>
-
+        <b-nav is-nav-bar>
+          <template v-if="global.loggedIn"><b-nav-item id="logout" to="#" v-on:click="logout">Logout</b-nav-item></template>
+          <template v-else><b-nav-item id="login" to="#" v-b-modal="'esg-login-modal'">Login</b-nav-item></template>
+        </b-nav>
         </b-collapse>
     </b-navbar>
+    <esg-login-modal></esg-login-modal>
   </div>
 </template>
 
 <script>
+  import toastr from 'toastr';
+  import firebase from '../utils/firebase';
+  import global from '../utils/globalstate';
+
+  import EsgLoginModal from './EsgLoginModal';
+
   export default {
     name: 'esg-navbar',
+    components: {
+      EsgLoginModal,
+    },
     data() {
       return {
+        global,
         brandsrc: 'static/img/logos/logo_black.png',
         navbaritemsleft: [
           {
@@ -60,7 +74,7 @@
           {
             type: 'normal',
             title: 'Kommende Events',
-            link: '/fifatournament',
+            link: '/upcoming',
           },
         ],
         navbaritemsright: [
@@ -71,6 +85,20 @@
           },
         ],
       };
+    },
+    methods: {
+      logout: function logout(e) {
+        firebase.auth().signOut().then(this.logoutSuccess).catch(this.logoutFail);
+        e.preventDefault();
+      },
+      logoutSuccess: function logoutSuccess() {
+        global.logout();
+        toastr.error(`Your Logout was successful.
+          See you soon!`);
+      },
+      logoutFail: function logoutFail(error) {
+        toastr.error(`Sorry! Something went wrong! Errorcode: ${error.code}`);
+      },
     },
 };
 </script>

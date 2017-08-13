@@ -9,6 +9,9 @@
 </template>
 
 <script>
+  import toastr from 'toastr';
+  import global from './utils/globalstate';
+  import firebase from './utils/firebase';
   import EsgNavbar from './components/EsgNavbar';
   import EsgFooter from './components/EsgFooter';
 
@@ -17,6 +20,16 @@ export default {
     components: {
       EsgNavbar,
       EsgFooter,
+    },
+    created: function created() {
+      function innerAuthChange(user) {
+        if (user) {
+          global.login(user);
+          toastr.success(`${global.getNumber()} Your Login was successful.
+            Welcome back!`);
+        }
+      }
+      firebase.auth().onAuthStateChanged(innerAuthChange);
     },
 };
 </script>

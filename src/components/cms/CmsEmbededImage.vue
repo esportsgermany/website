@@ -19,5 +19,7 @@
   width: 50%;
   height: 100%;
 }
-
+.row {
+  margin: 0;
+}
 </style>

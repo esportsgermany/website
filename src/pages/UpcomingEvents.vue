@@ -1,5 +1,5 @@
 <template>
-  <div id="whoweare">
+  <div id="upcoming-events">
     <esg-site :data="siteContent"></esg-site>
   </div>
 </template>
@@ -8,14 +8,14 @@
   import EsgSite from '../components/cms/EsgSite';
 
   export default {
-    name: 'whoweare',
+    name: 'upcomingEvents',
     components: {
       EsgSite,
     },
     data() {
       return {
         siteContent: {
-          siteRef: 'whoweare',
+          siteRef: 'upcomingevents',
         },
       };
     },
