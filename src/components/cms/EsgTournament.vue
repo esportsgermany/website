@@ -1,18 +1,15 @@
 <template>
   <div id="esg-tournament">
     <div  v-if="global.loggedIn && !isInList" class="row justify-content-center">
-      <b-btn v-if="" variant="outline-danger" id="toggle" v-on:click="toggleForm">{{ formbutton }}</b-btn>
+      <b-btn class="col-12" v-if="" variant="outline-danger" id="toggle" v-on:click="toggleForm">{{ formbutton }}</b-btn>
       <esg-tournament-form id="detail-form" :data="user"></esg-tournament-form>
     </div>
     <div id="user-table">
       <div class="row my-1">
-        <div class="col-sm-8">
+        <div class="col-12">
           <b-form-fieldset horizontal label="Filter" :label-cols="3">
             <b-form-input v-model="filter" placeholder="Type to Search" />
           </b-form-fieldset>
-        </div>
-        <div class="col-sm-4 text-md-right">
-          <b-button :disabled="!sortBy" @click="sortBy = null">Clear Sort</b-button>
         </div>
       </div>
 
@@ -133,5 +130,8 @@
   }
   #user-table {
     margin: 30px 10px;
+  }
+  #toggle {
+    cursor: pointer;
   }
 </style>
